@@ -11,12 +11,12 @@ export class SelectPoemsService {
 
   }
 
-  async getAll(): Promise<SelectPoems[]> {
-    return this.selectPoemsModel.find().exec();
+  async getAllByUserId(userId: number): Promise<SelectPoems[]> {
+    return this.selectPoemsModel.find({ userId }).exec();
   }
 
-  async getById(id: number): Promise<SelectPoems> {
-    return this.selectPoemsModel.findById(id)
+  async getByPoemAndUserId(poemId: number, userId: number): Promise<SelectPoems> {
+    return this.selectPoemsModel.findOne({ poemId, userId })
   }
 
   create(selectPoemsDto: CreateSelectPoemsDto): Promise<SelectPoems> {
@@ -25,8 +25,8 @@ export class SelectPoemsService {
     return newSelectPoems.save()
   }
 
-  async remove(id: number): Promise<SelectPoems> {
-    return this.selectPoemsModel.findByIdAndRemove(id)
+  async remove(poemId: number, userId: number): Promise<SelectPoems> {
+    return this.selectPoemsModel.findOneAndRemove({ poemId, userId })
   }
 
   async update(id: number, selectPoemsDto: UpdateSelectPoemsDto): Promise<SelectPoems> {

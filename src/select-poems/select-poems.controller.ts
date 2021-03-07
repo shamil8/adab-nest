@@ -21,14 +21,14 @@ export class SelectPoemsController {
 
   }
 
-  @Get()
-  getAllByUser(): Promise<SelectPoems[]> {
-    return this.selectPoemService.getAll();
+  @Get('user/:id')
+  getAllByUserId(@Param('id') id: number): Promise<SelectPoems[]> {
+    return this.selectPoemService.getAllByUserId(id);
   }
 
-  @Get(':id')
-  getOne(@Param('id') id: number): Promise<SelectPoems> {
-    return this.selectPoemService.getById(id);
+  @Get(':poemId/user/:id')
+  getOne(@Param('poemId') poemId: number, @Param('id') id: number): Promise<SelectPoems> {
+    return this.selectPoemService.getByPoemAndUserId(poemId, id);
   }
 
   @Post()
@@ -38,16 +38,16 @@ export class SelectPoemsController {
     return this.selectPoemService.create(createSelectPoemsDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: number): Promise<SelectPoems> {
-    return this.selectPoemService.remove(id);
+  @Delete(':poemId/user/:id')
+  remove(@Param('poemId') poemId: number, @Param('id') id: number): Promise<SelectPoems> {
+    return this.selectPoemService.remove(poemId, id);
   }
 
-  @Put(':id')
+  @Put(':poemId')
   update(
     @Body() updateSelectPoemsDto: UpdateSelectPoemsDto,
-    @Param('id') id: number,
+    @Param('poemId') poemId: number,
   ): Promise<SelectPoems> {
-    return this.selectPoemService.update(id, updateSelectPoemsDto);
+    return this.selectPoemService.update(poemId, updateSelectPoemsDto);
   }
 }
