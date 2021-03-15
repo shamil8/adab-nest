@@ -1,4 +1,11 @@
 #Adab nest service
+
+# Docker build
+
+`docker build --tag adab_nest:latest .`
+
+`docker run --name adab_nest --env MONGO_CON_STRING=mongodb://localhost:27017 -d -p 8001:8000 adab_nest:latest`
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
